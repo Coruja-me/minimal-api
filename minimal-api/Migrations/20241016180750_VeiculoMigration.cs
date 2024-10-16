@@ -61,8 +61,7 @@ namespace minimal_api.Migrations
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Marca = table.Column<string>(type: "varchar(32)", maxLength: 32, nullable: false)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    Ano = table.Column<string>(type: "varchar(10)", maxLength: 10, nullable: false)
-                        .Annotation("MySql:CharSet", "utf8mb4")
+                    Ano = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

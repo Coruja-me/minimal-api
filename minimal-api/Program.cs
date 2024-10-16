@@ -40,11 +40,22 @@ using minimal_api.Domain.Models;
 
 #region Veiculos
     //Cadastrar
-    app.MapPost("/veiculos", ([FromBody] VeiculoDTO veic, iVeiculoService vService) => {
+    app.MapPost("/veiculos", ([FromBody] VeiculoDTO vDTO, iVeiculoService vService) => {
+        var validation = new Error();
+        
+        if(string.IsNullOrEmpty(vDTO.Nome))
+            validation.Msgs.Add("O nome não pode ser vazio");
+        else if(string.IsNullOrEmpty(vDTO.Marca))
+
+            validation.Msgs.Add("A marca não pode ser vazia");
+
+        else if(vDTO.Ano < 1950)
+            validation.Msgs.Add("O ano não pode ser vazio e nem menor que 1950!");
+
         var veiculo = new Veiculo{
-            Nome = veic.Nome,
-            Marca = veic.Marca,
-            Ano = veic.Ano
+            Nome = vDTO.Nome,
+            Marca = vDTO.Marca,
+            Ano = vDTO.Ano
         };
         vService.Incluir(veiculo);
 

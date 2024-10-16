@@ -66,10 +66,8 @@ namespace minimal_api.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Ano")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
+                    b.Property<int>("Ano")
+                        .HasColumnType("int");
 
                     b.Property<string>("Marca")
                         .IsRequired()

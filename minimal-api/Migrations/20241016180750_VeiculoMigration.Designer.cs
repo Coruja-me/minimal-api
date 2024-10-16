@@ -11,7 +11,7 @@ using minimal_api.Infrastructure.DB;
 namespace minimal_api.Migrations
 {
     [DbContext(typeof(DBContext))]
-    [Migration("20241016154824_VeiculoMigration")]
+    [Migration("20241016180750_VeiculoMigration")]
     partial class VeiculoMigration
     {
         /// <inheritdoc />
@@ -69,10 +69,8 @@ namespace minimal_api.Migrations
 
                     MySqlPropertyBuilderExtensions.UseMySqlIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<string>("Ano")
-                        .IsRequired()
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
+                    b.Property<int>("Ano")
+                        .HasColumnType("int");
 
                     b.Property<string>("Marca")
                         .IsRequired()
