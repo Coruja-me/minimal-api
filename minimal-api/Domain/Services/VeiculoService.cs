@@ -19,15 +19,7 @@ namespace minimal_api.Domain.Services
             _db.SaveChanges();
         }
 
-        public void DeletarId(int id)
-        {
-            var Veic = _db.Veiculos.Find(id);
-                
-            _db.Veiculos.Remove(Veic);
-            _db.SaveChanges();
-        }
-
-        public void DeletarVeiculo(Veiculo veiculo)
+        public void Deletar(Veiculo veiculo)
         {
             _db.Veiculos.Remove(veiculo);
             _db.SaveChanges();

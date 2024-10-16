@@ -26,7 +26,7 @@ using minimal_api.Domain.Models;
 #endregion
 
 #region Home
-    app.MapGet("/", () => Results.Json(new Home()));
+    app.MapGet("/", () => Results.Json(new Home())).WithTags("Home");
 #endregion
 
 #region LoginAdmin
@@ -35,10 +35,11 @@ using minimal_api.Domain.Models;
             return Results.Ok("Login realizado com sucesso! Bem vindo!");
         else
             return Results.Unauthorized();
-    });
+    }).WithTags("Admin");
 #endregion
 
 #region Veiculos
+    //Cadastrar
     app.MapPost("/veiculos", ([FromBody] VeiculoDTO veic, iVeiculoService vService) => {
         var veiculo = new Veiculo{
             Nome = veic.Nome,
@@ -48,12 +49,53 @@ using minimal_api.Domain.Models;
         vService.Incluir(veiculo);
 
         return Results.Created($"/veiculo/{veiculo.Id}", veiculo);
-    });
+    }).WithTags("Veiculos");
+
+    //Listar por Página
     app.MapGet("/veiculos", ([FromQuery] int? pagina, iVeiculoService vService) => {
         var veic = vService.Veiculos(pagina);
 
         return Results.Ok(veic);
-    });
+    }).WithTags("Veiculos");
+
+    //Listar por Id
+    app.MapGet("/veiculos/{id}", ([FromRoute] int id, iVeiculoService vService) => {
+        var veic = vService.LerId(id);
+
+        if(veic == null)
+            return Results.NotFound();
+
+        return Results.Ok(veic);
+    }).WithTags("Veiculos");
+
+    //Atualizar
+    app.MapPut("/veiculos/{id}", ([FromRoute] int id, VeiculoDTO vDTO, iVeiculoService vService) => {
+        var veic = vService.LerId(id);
+
+        if(veic == null)
+            return Results.NotFound();
+        
+        veic.Nome = vDTO.Nome;
+        veic.Marca = vDTO.Marca;
+        veic.Ano = vDTO.Ano;
+
+        vService.Atualizar(veic);
+
+        return Results.Ok(veic);
+    }).WithTags("Veiculos");
+
+    //Deletar Por ID
+    app.MapDelete("/veiculos/{id}", ([FromRoute] int id, iVeiculoService vService) => {
+        var veic = vService.LerId(id);
+
+        if(veic == null)
+            return Results.NotFound();
+        
+
+        vService.Deletar(veic);
+
+        return Results.NoContent();
+    }).WithTags("Veiculos");    
 #endregion
 
 #region app

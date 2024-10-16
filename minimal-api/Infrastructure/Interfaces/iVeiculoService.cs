@@ -12,7 +12,6 @@ namespace minimal_api.Infrastructure.Interfaces
         Veiculo? LerId(int id);
         void Incluir(Veiculo veiculo);
         void Atualizar(Veiculo veiculo);
-        void DeletarId(int id);
-        void DeletarVeiculo(Veiculo veiculo);
+        void Deletar(Veiculo veiculo);
     }
 }
