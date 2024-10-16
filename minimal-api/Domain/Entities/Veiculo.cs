@@ -20,7 +20,7 @@ namespace minimal_api.Domain.Entities
         [StringLength(32)]
         public string Marca { get; set; } = default!;
 
-        [StringLength(10)]
+        [StringLength(4)]
         public string Ano { get; set; } = default!;
     }
 }

@@ -13,9 +13,10 @@ namespace minimal_api.Domain.Services
     {
         private readonly DBContext _db = db;
 
-        public Veiculo Atualizar(Veiculo veiculo)
+        public void Atualizar(Veiculo veiculo)
         {
-            throw new NotImplementedException();
+            _db.Veiculos.Update(veiculo);
+            _db.SaveChanges();
         }
 
         public void DeletarId(int id)
@@ -43,7 +44,7 @@ namespace minimal_api.Domain.Services
             return _db.Veiculos.Where(v => v.Id == id).FirstOrDefault();
         }
 
-        public List<Veiculo> Veiculos(int pagina = 1, string? nome = null, string? marca = null)
+        public List<Veiculo> Veiculos(int? pagina = 1, string? nome = null, string? marca = null)
         {
             var query = _db.Veiculos.AsQueryable();
             if(!string.IsNullOrEmpty(nome))
@@ -51,19 +52,11 @@ namespace minimal_api.Domain.Services
             
             int ItensPag = 15;
 
-            query = query.Skip((pagina--) * ItensPag).Take(ItensPag);
-
+            if (pagina.HasValue){
+                query = query.Skip(((int)pagina--) * ItensPag).Take(ItensPag);
+            }
             return query.ToList();
         }
 
-        void iVeiculoService.Atualizar(Veiculo veiculo)
-        {
-
-        }
-
-        void iVeiculoService.Incluir(Veiculo veiculo)
-        {
-            throw new NotImplementedException();
-        }
     }
 }
