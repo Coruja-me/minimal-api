@@ -1,9 +1,13 @@
+using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace minimal_api.Domain.Entities
 {
-    public class Admin
+    public class Veiculo
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -11,14 +15,12 @@ namespace minimal_api.Domain.Entities
 
         [Required]
         [StringLength(255)]
-        public string Email { get; set; } = default!;
+        public string Nome { get; set; } = default!;
 
-        [Required]
         [StringLength(32)]
-        public string Senha { get; set; } = default!;
+        public string Marca { get; set; } = default!;
 
-        [Required]
         [StringLength(10)]
-        public string Perfil { get; set; } = default!;
+        public string Ano { get; set; } = default!;
     }
 }

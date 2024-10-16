@@ -5,11 +5,14 @@ using Microsoft.EntityFrameworkCore;
 using minimal_api.Domain.Services;
 using minimal_api.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using minimal_api.Domain.Models;
 
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddScoped<iAdminService, AdminService>();
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 builder.Services.AddDbContext<DBContext>(options =>{
     options.UseMySql(
@@ -20,7 +23,7 @@ builder.Services.AddDbContext<DBContext>(options =>{
 
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello World!");
+app.MapGet("/", () => Results.Json(new Home()));
 
 app.MapPost("/login", ([FromBody] LoginDTO log, iAdminService adminService) => {
     if(adminService.Login(log) != null)
@@ -28,5 +31,8 @@ app.MapPost("/login", ([FromBody] LoginDTO log, iAdminService adminService) => {
     else
         return Results.Unauthorized();
 });
+
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.Run();

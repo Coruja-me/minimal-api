@@ -104,3 +104,8 @@ D:\Docs Geral\Caã\codes\ASP.NET\minimal-api\bin\Debug\net8.0\zh-Hant\Microsoft.
 D:\Docs Geral\Caã\codes\ASP.NET\minimal-api\obj\Debug\net8.0\minimal-api.csproj.AssemblyReference.cache
 D:\Docs Geral\Caã\codes\ASP.NET\minimal-api\obj\Debug\net8.0\minimal-api.sourcelink.json
 D:\Docs Geral\Caã\codes\ASP.NET\minimal-api\obj\Debug\net8.0\minimal-.F3613C90.Up2Date
+D:\Docs Geral\Caã\codes\ASP.NET\minimal-api\bin\Debug\net8.0\Microsoft.OpenApi.dll
+D:\Docs Geral\Caã\codes\ASP.NET\minimal-api\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+D:\Docs Geral\Caã\codes\ASP.NET\minimal-api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+D:\Docs Geral\Caã\codes\ASP.NET\minimal-api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+D:\Docs Geral\Caã\codes\ASP.NET\minimal-api\obj\Debug\net8.0\minimal-api.MvcApplicationPartsAssemblyInfo.cs

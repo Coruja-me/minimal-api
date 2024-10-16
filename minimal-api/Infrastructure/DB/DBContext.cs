@@ -8,6 +8,7 @@ namespace minimal_api.Infrastructure.DB
         private readonly IConfiguration _config = config;
 
         public DbSet<Admin> Admins { get; set; } = default!;
+        public DbSet<Veiculo> Veiculos { get; set; } = default!;
 
         protected override void OnModelCreating(ModelBuilder mBuilder)
         {
