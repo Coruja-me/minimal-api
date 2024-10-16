@@ -6,9 +6,10 @@ using minimal_api.Domain.Services;
 using minimal_api.Infrastructure.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using minimal_api.Domain.Models;
+using minimal_api.Domain.Enuns;
 
 #region Builder
-    var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 
     builder.Services.AddScoped<iAdminService, AdminService>();
     builder.Services.AddScoped<iVeiculoService, VeiculoService>();
@@ -29,28 +30,89 @@ using minimal_api.Domain.Models;
     app.MapGet("/", () => Results.Json(new Home())).WithTags("Home");
 #endregion
 
-#region LoginAdmin
-    app.MapPost("/admin/login", ([FromBody] LoginDTO log, iAdminService adminService) => {
-        if(adminService.Login(log) != null)
+#region Admin
+    //LoginADM
+    app.MapPost("/admin/login", ([FromBody] LoginDTO log, iAdminService aService) => {
+        if(aService.Login(log) != null)
             return Results.Ok("Login realizado com sucesso! Bem vindo!");
         else
             return Results.Unauthorized();
     }).WithTags("Admin");
+
+    //CadastrarADM
+    app.MapPost("/admin", ([FromBody] AdminDTO aDTO, iAdminService aService) => {
+        var validation = new Error{
+            Msgs = []
+        };
+        if(string.IsNullOrEmpty(aDTO.Email))
+            validation.Msgs.Add("O email não pode ser vazio");
+        if(string.IsNullOrEmpty(aDTO.Senha))
+            validation.Msgs.Add("A senha não pode ser vazia");
+        if(aDTO.Perfil == null)
+            validation.Msgs.Add("O Perfil não pode ser vazio");
+        
+        if(validation.Msgs.Count > 0)
+            return Results.BadRequest(validation);
+
+        var adm = new Admin{
+            Email = aDTO.Email,
+            Senha = aDTO.Senha,
+            Perfil = aDTO.Perfil.ToString() ?? Perfil.Editor.ToString()
+        };
+
+        aService.Incluir(adm);
+
+        return Results.Created($"/admin/{adm.Id}", adm);
+    }).WithTags("Admin");
+
+    //Lista por Pagina
+    app.MapGet("/admin", ([FromQuery] int? pagina, iAdminService aService) => {
+        var adms = new List<AdmMV>();
+        var admins = aService.Admins(pagina);
+        foreach (var adm in admins){
+            adms.Add(new AdmMV{
+                Id = adm.Id,
+                Email = adm.Email,
+                Perfil = adm.Perfil
+            });
+        }
+
+        return Results.Ok(adms);
+    }).WithTags("Admin");
+
+    //Lista por Id
+    app.MapGet("/admin/{id}", ([FromRoute] int id, iAdminService aService) => {
+        var adm = aService.LerId(id);
+
+        if(adm == null)
+            return Results.NotFound();
+
+        return Results.Ok(adm);
+    }).WithTags("Admin");
 #endregion
 
 #region Veiculos
-    //Cadastrar
-    app.MapPost("/veiculos", ([FromBody] VeiculoDTO vDTO, iVeiculoService vService) => {
-        var validation = new Error();
-        
+    Error validaDTO(VeiculoDTO vDTO){
+        var validation = new Error{
+            Msgs = []
+        };
+
         if(string.IsNullOrEmpty(vDTO.Nome))
             validation.Msgs.Add("O nome não pode ser vazio");
-        else if(string.IsNullOrEmpty(vDTO.Marca))
-
+        if(string.IsNullOrEmpty(vDTO.Marca))
             validation.Msgs.Add("A marca não pode ser vazia");
-
-        else if(vDTO.Ano < 1950)
+        if(vDTO.Ano < 1950)
             validation.Msgs.Add("O ano não pode ser vazio e nem menor que 1950!");
+        
+        return validation;
+    }
+    //Cadastrar
+    app.MapPost("/veiculos", ([FromBody] VeiculoDTO vDTO, iVeiculoService vService) => {
+
+        var validation = validaDTO(vDTO);
+
+        if(validation.Msgs.Count > 0)
+            return Results.BadRequest(validation);
 
         var veiculo = new Veiculo{
             Nome = vDTO.Nome,

@@ -10,5 +10,8 @@ namespace minimal_api.Infrastructure.Interfaces
     public interface iAdminService
     {
         Admin? Login(LoginDTO log);
+        Admin Incluir(Admin admin);
+        Admin? LerId(int id);
+        List<Admin> Admins(int? pagina);
     }
 }
