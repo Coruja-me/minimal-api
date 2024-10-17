@@ -109,3 +109,11 @@ D:\Docs Geral\Caã\codes\ASP.NET\minimal-api\bin\Debug\net8.0\Swashbuckle.AspNet
 D:\Docs Geral\Caã\codes\ASP.NET\minimal-api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
 D:\Docs Geral\Caã\codes\ASP.NET\minimal-api\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
 D:\Docs Geral\Caã\codes\ASP.NET\minimal-api\obj\Debug\net8.0\minimal-api.MvcApplicationPartsAssemblyInfo.cs
+D:\Docs Geral\Caã\codes\ASP.NET\minimal-api\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\Docs Geral\Caã\codes\ASP.NET\minimal-api\bin\Debug\net8.0\Microsoft.IdentityModel.Abstractions.dll
+D:\Docs Geral\Caã\codes\ASP.NET\minimal-api\bin\Debug\net8.0\Microsoft.IdentityModel.JsonWebTokens.dll
+D:\Docs Geral\Caã\codes\ASP.NET\minimal-api\bin\Debug\net8.0\Microsoft.IdentityModel.Logging.dll
+D:\Docs Geral\Caã\codes\ASP.NET\minimal-api\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.dll
+D:\Docs Geral\Caã\codes\ASP.NET\minimal-api\bin\Debug\net8.0\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+D:\Docs Geral\Caã\codes\ASP.NET\minimal-api\bin\Debug\net8.0\Microsoft.IdentityModel.Tokens.dll
+D:\Docs Geral\Caã\codes\ASP.NET\minimal-api\bin\Debug\net8.0\System.IdentityModel.Tokens.Jwt.dll

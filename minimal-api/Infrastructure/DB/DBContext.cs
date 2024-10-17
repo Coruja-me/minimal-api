@@ -26,7 +26,7 @@ namespace minimal_api.Infrastructure.DB
 
             if(!optionsBuilder.IsConfigured){
 
-                var strConnection = _config.GetConnectionString("mysql")?.ToString();
+                var strConnection = _config.GetConnectionString("MySql")?.ToString();
 
                 if(!string.IsNullOrEmpty(strConnection)){
                     optionsBuilder.UseMySql(
